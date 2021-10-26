@@ -17,6 +17,7 @@ namespace interview_yungching.Services
 
         public bool CreateCustomer(CustomerRequest customer)
         {
+            //有重複的Id直接回false
             if (_customerDA.ExistCustomer(customer.CustomerId))
                 return false;
 
