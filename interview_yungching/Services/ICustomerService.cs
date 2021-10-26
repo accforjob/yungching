@@ -10,9 +10,9 @@ namespace interview_yungching.Services
     {
         Customer GetCustomer(string customerId);
 
-        bool CreateCustomer(Customer customer);
+        bool CreateCustomer(CustomerRequest customer);
 
-        bool UpdateCustomer(Customer customer);
+        bool UpdateCustomer(CustomerRequest customer);
 
         bool DeleteCustomer(string customerId);
     }

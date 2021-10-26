@@ -1,4 +1,5 @@
-﻿using interview_yungching.Services;
+﻿using interview_yungching.Models;
+using interview_yungching.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace interview_yungching.Controllers
 {
+    [ApiController]
+    [Route("/api/[Controller]")]
     public class CustomerController : Controller
     {
         private readonly ICustomerService _service;
@@ -15,22 +18,28 @@ namespace interview_yungching.Controllers
             _service = service;
         }
 
-        [HttpGet("/{customerId}")]
+        [HttpGet("{customerId}")]
         public IActionResult Read(string customerId)
         {
             return Ok(_service.GetCustomer(customerId));
         }
 
         [HttpPost]
-        public IActionResult Create()
+        public IActionResult Create(CustomerRequest customer)
         {
-            return Ok();
+            return Ok(_service.CreateCustomer(customer));
         }
 
         [HttpPut]
-        public IActionResult Update()
+        public IActionResult Update(CustomerRequest customer)
         {
-            return Ok();
+            return Ok(_service.UpdateCustomer(customer));
+        }
+
+        [HttpDelete("{customerId}")]
+        public IActionResult Delete(string customerId)
+        {
+            return Ok(_service.DeleteCustomer(customerId));
         }
     }
 }

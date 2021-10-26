@@ -1,4 +1,5 @@
 ﻿using interview_yungching.Models;
+using interview_yungching.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,13 @@ namespace interview_yungching.DataAccess
     {
         Customer GetCustomer(string customerId);
 
-        bool CreateCustomer(Customer customer);
+        bool CreateCustomer(CustomerRequest customer);
 
-        bool UpdateCustomer(Customer customer);
+        bool UpdateCustomer(CustomerRequest customer);
 
         bool DeleteCustomer(string customerId);
+
+        bool ExistCustomer(string customerId);
 
     }
 }

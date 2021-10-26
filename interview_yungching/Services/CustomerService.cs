@@ -15,14 +15,17 @@ namespace interview_yungching.Services
             _customerDA = customerDA;
         }
 
-        public bool CreateCustomer(Customer customer)
+        public bool CreateCustomer(CustomerRequest customer)
         {
-            throw new NotImplementedException();
+            if (_customerDA.ExistCustomer(customer.CustomerId))
+                return false;
+
+            return _customerDA.CreateCustomer(customer);
         }
 
         public bool DeleteCustomer(string customerId)
         {
-            throw new NotImplementedException();
+            return _customerDA.DeleteCustomer(customerId);
         }
 
         public Customer GetCustomer(string customerId)
@@ -30,9 +33,9 @@ namespace interview_yungching.Services
             return _customerDA.GetCustomer(customerId);
         }
 
-        public bool UpdateCustomer(Customer customer)
+        public bool UpdateCustomer(CustomerRequest customer)
         {
-            throw new NotImplementedException();
+            return _customerDA.UpdateCustomer(customer);
         }
     }
 }

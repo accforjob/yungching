@@ -1,5 +1,7 @@
 ﻿using interview_yungching.Contexts;
 using interview_yungching.Models;
+using interview_yungching.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +17,17 @@ namespace interview_yungching.DataAccess
             _myDBContext = myDBContext;
         }
 
-        public bool CreateCustomer(Customer customer)
+        public bool ExistCustomer(string customerId)
         {
-            _myDBContext.Add(customer);
+            return _myDBContext.Customers.FirstOrDefault(p => p.CustomerId == customerId) != null;
+        }
+
+        public bool CreateCustomer(CustomerRequest customer)
+        {
+            var dbCustomer = _myDBContext.Customers.Attach(new Customer { CustomerId = customer.CustomerId });
+            dbCustomer.CurrentValues.SetValues(customer);
+            _myDBContext.Entry(dbCustomer.Entity).State = EntityState.Added;
+
             return _myDBContext.SaveChanges() > 0;
         }
 
@@ -30,10 +40,10 @@ namespace interview_yungching.DataAccess
 
         public Customer GetCustomer(string customerId)
         {
-            return _myDBContext.Customers.Where(p => p.CustomerId == customerId).FirstOrDefault();
+            return _myDBContext.Customers.FirstOrDefault(p => p.CustomerId == customerId);
         }
 
-        public bool UpdateCustomer(Customer customer)
+        public bool UpdateCustomer(CustomerRequest customer)
         {
             var dbCustomer = _myDBContext.Customers.FirstOrDefault(p => p.CustomerId == customer.CustomerId);
             _myDBContext.Entry(dbCustomer).CurrentValues.SetValues(customer);
