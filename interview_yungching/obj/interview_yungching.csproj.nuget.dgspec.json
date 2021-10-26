@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Coding\\Interview\\interview_yungching\\interview_yungching\\interview_yungching.csproj": {}
+    "D:\\Coding\\Interview\\testClone\\interview_yungching\\interview_yungching.csproj": {}
   },
   "projects": {
-    "D:\\Coding\\Interview\\interview_yungching\\interview_yungching\\interview_yungching.csproj": {
+    "D:\\Coding\\Interview\\testClone\\interview_yungching\\interview_yungching.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Coding\\Interview\\interview_yungching\\interview_yungching\\interview_yungching.csproj",
+        "projectUniqueName": "D:\\Coding\\Interview\\testClone\\interview_yungching\\interview_yungching.csproj",
         "projectName": "interview_yungching",
-        "projectPath": "D:\\Coding\\Interview\\interview_yungching\\interview_yungching\\interview_yungching.csproj",
+        "projectPath": "D:\\Coding\\Interview\\testClone\\interview_yungching\\interview_yungching.csproj",
         "packagesPath": "C:\\Users\\handsome\\.nuget\\packages\\",
-        "outputPath": "D:\\Coding\\Interview\\interview_yungching\\interview_yungching\\obj\\",
+        "outputPath": "D:\\Coding\\Interview\\testClone\\interview_yungching\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

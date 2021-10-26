@@ -6,6 +6,7 @@ using NSubstitute;
 using System;
 using System.Threading.Tasks;
 using Xunit;
+using FluentAssertions;
 
 namespace MyTestProject
 {
@@ -96,6 +97,89 @@ namespace MyTestProject
 
             //比對實際結果以及預期結果
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Test_DeleteCustomer()
+        {
+            //Arrange
+            var sut = this.GetSystemUnderTest();
+            var customerId = "TEST1";
+
+            //後方Returns可指定回傳值
+            this._mockDA.DeleteCustomer(Arg.Any<string>()).Returns(true);
+
+            //預期收到結果
+            var expected = true;
+
+            //Act
+            //實際結果
+            var actual = sut.DeleteCustomer(customerId);
+
+            //Assert
+            //Reveived內的參數為預期CreateProject收到幾次，後方可設定預期接收到的參數
+            this._mockDA.Received(1).DeleteCustomer(customerId);
+
+            //比對實際結果以及預期結果
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData("TEST1")]
+        [InlineData("TEST9")]
+        public void Test_GetCustomer(string customerId)
+        {
+            //Arrange
+            var sut = this.GetSystemUnderTest();
+
+            //後方Returns可指定回傳值
+            this._mockDA.GetCustomer("TEST1").Returns(new Customer
+            {
+                CustomerId = customerId,
+                CompanyName = "company",
+                ContactName = "CN",
+                ContactTitle = "CT",
+                Address = "here",
+                City = "TP",
+                Region = "r",
+                PostalCode = "pCode",
+                Country = "Taiwan",
+                Phone = "0955588669",
+                Fax = "02-55558888"
+            });
+
+            this._mockDA.GetCustomer("TEST9").Returns(new Customer());
+
+            //預期收到結果
+            var expected = new Customer();
+            if ("TEST1" == customerId)
+            {
+                expected = new Customer
+                {
+                    CustomerId = customerId,
+                    CompanyName = "company",
+                    ContactName = "CN",
+                    ContactTitle = "CT",
+                    Address = "here",
+                    City = "TP",
+                    Region = "r",
+                    PostalCode = "pCode",
+                    Country = "Taiwan",
+                    Phone = "0955588669",
+                    Fax = "02-55558888"
+                };
+            }
+
+            //Act
+            //實際結果
+            var actual = sut.GetCustomer(customerId);
+
+            //Assert
+            //Reveived內的參數為預期CreateProject收到幾次，後方可設定預期接收到的參數
+            this._mockDA.Received(1).GetCustomer(customerId);
+
+            //比對實際結果以及預期結果
+            expected.Should().BeEquivalentTo(actual);
         }
 
 
